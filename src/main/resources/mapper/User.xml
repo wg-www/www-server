@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wg.www.mapper.UserMapper" >
+
+    <resultMap id="BaseResultMap" type="com.wg.www.domain.User" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="username" property="username" jdbcType="VARCHAR" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+      id, username, password
+    </sql>
+
+    <sql id="tablename">
+      USER
+    </sql>
+
+    <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from <include refid="tablename" />
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByUsername" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from <include refid="tablename" />
+        where username = #{username,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectList" resultMap="BaseResultMap" parameterType="com.wg.www.domain.User">
+        SELECT <include refid="Base_Column_List" />
+        FROM <include refid="tablename" />
+        <where>
+            <if test="username != null and username != ''">
+                AND username=#{username}
+            </if>
+            <if test="password != null and password != ''">
+                AND password=#{password}
+            </if>
+        </where>
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from <include refid="tablename" />
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+    <insert id="insert" parameterType="com.wg.www.domain.User" keyProperty="id">
+        insert into <include refid="tablename" /> ( username, password)
+        values (
+        #{username,jdbcType=VARCHAR},
+        #{password,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.wg.www.domain.User" >
+        insert into <include refid="tablename" />
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="username != null" >
+                username,
+            </if>
+            <if test="password != null" >
+                password,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="username != null" >
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null" >
+                #{password,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.wg.www.domain.User" >
+        update <include refid="tablename" />
+        <set >
+            <if test="username != null" >
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null" >
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.wg.www.domain.User" >
+        update <include refid="tablename" />
+        set username = #{username,jdbcType=VARCHAR},
+        password = #{password,jdbcType=VARCHAR},
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>
