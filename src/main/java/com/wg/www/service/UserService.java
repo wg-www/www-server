@@ -1,4 +1,4 @@
-package com.wg.www.server;
+package com.wg.www.service;
 
 import com.wg.www.domain.User;
 

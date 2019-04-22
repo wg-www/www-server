@@ -1,7 +1,7 @@
 package com.wg.www.controller;
 
 import com.google.common.collect.Maps;
-import com.wg.www.server.UserService;
+import com.wg.www.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

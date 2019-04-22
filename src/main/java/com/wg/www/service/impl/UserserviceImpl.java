@@ -1,8 +1,8 @@
-package com.wg.www.server.impl;
+package com.wg.www.service.impl;
 
 import com.wg.www.domain.User;
 import com.wg.www.mapper.UserMapper;
-import com.wg.www.server.UserService;
+import com.wg.www.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
