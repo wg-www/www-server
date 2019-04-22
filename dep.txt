@@ -2,4 +2,6 @@
 2.docker build -t www-server:1.0.0 .
 3.docker save -o www-server.tar www-server
 5.docker load --input www-server.tar
-4.docker run -d -p 9099:9099 --net=host --name www-server www-server:1.0.0
+4.docker run -d -p 9099:9099 --rm  --net=host --name www-server www-server:1.0.0
+
+# windows下运行不可用localhost访问，用docker容器地址访问
